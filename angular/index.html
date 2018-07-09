@@ -2,39 +2,19 @@
 <html lang="en" ng-app="helloAngular">
 <head>
 	<meta charset="UTF-8">
-	<title>AngularJS</title>
-	<script type="text/javascript" src="js/angular-1.6.10.min.js"></script>	
-	<script type="text/javascript" src="js/scope.js"></script>
+	<title>AngularJS</title>	
 </head>
 <body>
-	<div ng-controller="myCtrl">
-    	<input ng-model="name">
-    	<h1>{{greeting}}</h1>
-    	<button ng-click='sayHello()'>点我</button>    
-	</div>
-
-	<div ng-controller="EventController">
-		Root scope
-		<tt>MyEvent</tt>count:{{count}}
-		<ul>
-			<li ng-repeat="i in [1]" ng-controller="EventController">
-				<button ng-click="$emit('MyEvent')">
-					$emit('MyEvent')
-				</button>
-				<button ng-click="$broadcast('MyEvent')">
-					$broadcast('MyEvent')
-				</button>
-				<br>
-				Middle scope
-				<tt>MyEvent</tt>count:{{count}}
-				<ul>
-					<li ng-repeat="item in [1,2]" ng-controller="EventController">
-						Leaf scope
-						<tt>MyEvent</tt>count:{{count}}
-					</li>
-				</ul>
-			</li>	
-		</ul>		
-	</div>	
+	<div ng-view></div>
+	<script type="text/javascript" src="js/angularjs/angular-1.6.10.min.js"></script>	
+	<script type="text/javascript" src="js/angularjs/angular-route.js"></script>
+	<script type="text/javascript" src="js/seajs/sea.js"></script>
+	
+	<script type="text/javascript" src="js/main.js"></script>
+	
+	<!-- <script type="text/javascript" src="js/app/app.js"></script>
+	<script type="text/javascript" src="js/controller/myCtrl.js"></script>	
+	<script type="text/javascript" src="js/controller/myTab.js"></script>
+	<script type="text/javascript" src="js/controller/eventController.js"></script> -->
 </body>
 </html>

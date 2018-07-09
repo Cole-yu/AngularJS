@@ -1,0 +1,10 @@
+define(function(require,exports,module){
+	exports.myTab=function(myModule){
+		myModule.controller('myTab',['$scope',function($scope){
+			$scope.tab="tab1";
+			$scope.myClick=function($event){				
+				this.tab=$event.target.innerText;
+			};
+		}]);	
+	}
+});
