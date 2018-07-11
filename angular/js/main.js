@@ -3,5 +3,5 @@ seajs.config({
 });
 
 seajs.use('app/app',function(app){
-	app.myTab();
-})
+	app.showList();
+});
