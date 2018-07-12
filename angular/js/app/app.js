@@ -1,7 +1,25 @@
 define('app/app',function(require,exports,module){
+	var jquery=require('jquery');	
+
+	var controllerProvider=null;
+
+	var myModule=angular.module('helloAngular',['ngRoute'],function($controllerProvider){
+		controllerProvider=$controllerProvider;
+		console.log(controllerProvider);
+	});
+
+	function registerControllerProvider($controllerProvider){
+		$controllerProvider.register('myCtrl',function($scope){		//在bootstrap之后使用注册使用控制器
+			console.log('myCtrl init()');
+			$scope.name = "Runoob";
+		    $scope.sayHello = function() {
+		        $scope.greeting = 'Hello ' + $scope.name + '!';
+		    };
+		});
+	}	
 
 	exports.showList=function(){
-		var myModule=angular.module('helloAngular',['ngRoute']);		//定义一个module,一切从module开始	
+			//定义一个module,一切从module开始
 
 		myModule.config(['$routeProvider',function($routeProvider){
 			$routeProvider
@@ -19,15 +37,30 @@ define('app/app',function(require,exports,module){
 				})
 				.otherwise({redirectTo:'/'});
 		}]);
+	}	
+		
 
-		getMyTab(myModule);
+	exports.init=function(){
+		$(function(){
+			getMyTab(myModule);
+			initNavi(myModule);
 
-		getEventController(myModule);
+			// getEventController(myModule);
 
-		getMyCtrl(myModule);
+			// getMyCtrl(myModule);
 
-		angular.bootstrap(document.body,['helloAngular']);
+			angular.bootstrap(document.body,['helloAngular']);
 
+		});
+	}
+
+	function initNavi(app){
+		app.controller('navi',['$scope',function($scope){
+			$scope.myCtrlClick=function(){
+				console.log(controllerProvider);
+				registerControllerProvider(controllerProvider);
+			}
+		}]);
 	}
 
 	function getMyTab(app){

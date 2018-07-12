@@ -7,10 +7,10 @@
 </head>
 <body>
 
-	<ul>
-		<li><a href="#!/myTab">myTab</a></li>
+	<ul ng-controller="navi">
+		<li><a href="#!/myTab" >myTab</a></li>
 		<li><a href="#!/eventController">eventController</a></li>
-		<li><a href="#!/dsad">myCtrl</a></li>
+		<li><a href="#!/dsad" ng-click="myCtrlClick()">myCtrl</a></li>
 	</ul>
 	<div ng-view></div>
 	<script type="text/javascript" src="js/angularjs/angular-1.6.10.min.js"></script>	

@@ -1,0 +1,66 @@
+<html>
+  <head>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/angularjs/angular-1.6.10.min.js"></script>	
+	<script>
+	
+		var isPageReady = false;
+		
+		// 模块的$controllerProvider,用来动态注册controller
+		var  controllerProvider = null;		
+		
+		// 创建一个模块,并记录$controllerProvider
+        var myModule = angular.module('myModule', [], function($controllerProvider) {
+              controllerProvider = $controllerProvider;
+		});  
+				
+		
+		function controller1($scope)
+		{
+			console.log("controller1 executed.");
+			
+			$scope.add = function(){
+				$("#div1").append("<div id='div2'>dynamicly add</div>");
+				registerController("div2", "div1_ctr2", function($scope){
+					console.log("controller2 executed.");
+				});
+			}
+		}
+          
+       
+        // 页面加载完成后,再加载模块  
+		$(function(){
+			registerController("div1", "div1_ctrl", controller1);
+			
+			angular.bootstrap($("#div1")[0], ["myModule"]);
+			
+			isPageReady = true;
+		})
+        
+		
+		function registerController(elementId, controllerName, func)
+		{
+			$("#"+elementId).attr("ng-controller",controllerName);
+			
+			if(isPageReady == false)
+			{
+				myModule.controller(controllerName, func);
+			}
+			else
+			{
+				controllerProvider.register(controllerName, func);
+				
+				$("#"+elementId).injector().invoke(function($compile, $rootScope) {
+                    $compile($("#"+elementId))($rootScope);
+                });
+			}
+		}		
+	</script>
+  </head>
+  
+  <body>
+	<div id="div1">
+		<input type="button" value="dynamic" ng-click="add();"></input>
+	</div>  
+  </body>
+</html>
