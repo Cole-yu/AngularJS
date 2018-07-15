@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="asset/angular/angular.js"></script>
+    <script src="asset/ui-router/angular-ui-router.js"></script>
+    <script src="asset/oclazyload/src/ocLazyLoad.min.js"></script>    
+    <script src="main.js"></script>
+</head>
+<body ng-app="app">
+    <div>
+        <a ui-sref="main" ui-sref-active="active">主页</a>
+        <a ui-sref="adminUser" ui-sref-active="active">admin user</a>
+    </div>
+    <div ui-view ng-cloak></div>
+</body>
+</html>
