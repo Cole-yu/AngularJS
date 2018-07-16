@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJS</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="script/angular/angular.js"></script>
+	<script type="text/javascript" src="script/seajs/sea.js"></script>
+	<script type="text/javascript" src="script/ui-router/angular-ui-router.js"></script>
+	<script type="text/javascript" src="script/oclazyload/ocLazyLoad.min.js"></script>	
+	<script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+	<div>
+        <a ui-sref="main" ui-sref-active="active">主页</a>
+        <a ui-sref="adminUser" ui-sref-active="active">admin user</a>
+    </div>
+    <div ui-view ng-cloak></div>
+</body>
+</html>
