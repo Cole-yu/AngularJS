@@ -1,4 +1,5 @@
 (function(angular){
+  console.log(angular);
     var app=angular.module('sunday',['ui.router']);
     app.config(function($stateProvider){
         $stateProvider

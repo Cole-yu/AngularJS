@@ -5,7 +5,11 @@ seajs.config({
 	}
 });
 
-seajs.use(['app/app','app/controllers/main','app/controllers/adminUser'],function(app,main,admin){
-
-	console.log('main.js启动成功');	
+seajs.use(['app/app','app/controllers/main','app/controllers/adminUser','app/directives/test-directive'],function(app,main,admin){	
+	console.log(app);
+	console.log('main.js启动成功');
 });
+
+// seajs.use(['app/app'],function(app){
+// 	console.log('main.js启动成功');	
+// });

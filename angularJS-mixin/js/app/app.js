@@ -1,7 +1,7 @@
 define('app/app',function(require,exports,module){
 	var jquery=require('jquery');
 
-	var app = angular.module('app', ["ui.router", "oc.lazyLoad"]);
+	var app = angular.module('app', ["ui.router", "oc.lazyLoad"]);	
 
 	app.config(["$provide", "$compileProvider", "$controllerProvider", "$filterProvider",
 	    function ($provide, $compileProvider, $controllerProvider, $filterProvider) {
@@ -10,7 +10,7 @@ define('app/app',function(require,exports,module){
 	        app.filter = $filterProvider.register;
 	        app.factory = $provide.factory;
 	        app.service = $provide.service;
-	        app.constant = $provide.constant;
+	        app.constant = $provide.constant;	        
 	    }
 	]);
 
@@ -46,5 +46,7 @@ define('app/app',function(require,exports,module){
 	]);
 
 	angular.bootstrap(document.body,['app']);
+
+	return app;
 
 });
