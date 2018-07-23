@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myApp">  
+<head>
+    <meta charset="utf-8">
+    <title>ui-Grid Example01</title>  
+    <link rel="stylesheet" type="text/css" href="js/angular-ui-grid/ui-grid-css/ui-grid.css" />
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="js/angular-ui-grid/ui-grid.js"></script>
+    <!-- ui-grid export 导出-->
+    <script src="js/angular-ui-grid/pdfmake.js"></script>
+    <script src="js/angular-ui-grid/vfs_fonts.js"></script>
+    <script src="js/angular-ui-grid/csv.js"></script>
+</head>
+<body ng-controller="MyCtrl">
+    <div  ui-grid="gridOptions" style="width: 100%; height: 500px; text-align: center;" ui-grid-edit ui-grid-pagination 
+    ui-grid-selection ui-grid-exporter ui-grid-resize-columns ui-grid-auto-resize>
+    </div>
+    
+    <div style="width:100%; height: 100px">
+         <ol>
+            <li>名称：{{testRow.name}}</li>
+            <li>年龄：{{testRow.age}}</li>
+            <li>生日：{{testRow.birthday}}</li>
+         </ol>   
+    </div>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
