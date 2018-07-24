@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>transclude</title>
+	<script type="text/javascript" src="angular.js"></script>	
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body ng-app="app">
+	<div ng-controller="phone">
+		<app-select>
+			<version ng-repeat="version in versions track by $index" ver="{{version}}">
+				<product ng-repeat="product in products track by $index" pro="{{product}}">
+					<device ng-repeat="device in devices track by $index" dev="{{device}}"></device>
+				</product>
+			</version>
+		</app-select>
+	</div>	
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

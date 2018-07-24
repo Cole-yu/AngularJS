@@ -1,4 +1,6 @@
-var expModule=angular.module('expanderModule',[])
+//指令间交互
+
+var expModule=angular.module('expanderModule',[]);
 expModule.directive('accordion', function() {
 	return {
 		restrict : 'EA',
@@ -7,14 +9,14 @@ expModule.directive('accordion', function() {
 		template : '<div ng-transclude></div>',
 		controller : function() {
 			var expanders = [];
-			this.gotOpened = function(selectedExpander) {     //关闭其他窗口,只打开指定的窗口
+			this.gotOpened = function(selectedExpander) {     	//关闭其他窗口,只打开指定的窗口
 				angular.forEach(expanders, function(expander) {
 					if (selectedExpander != expander) {
 						expander.showMe = false;
 					}
 				});
 			}
-			this.addExpander = function(expander) {
+			this.addExpander = function(expander) {        		//添加子级折叠区域
 				expanders.push(expander);
 			}
 		}
@@ -26,7 +28,7 @@ expModule.directive('expander', function() {
 		restrict : 'EA',
 		replace : true,
 		transclude : true,
-		require : '^?accordion',
+		require : '^?accordion',								//指令间交互
 		scope : {
 			title : '=expanderTitle'
 		},
