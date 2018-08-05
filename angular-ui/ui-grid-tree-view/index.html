@@ -1,0 +1,32 @@
+<!doctype html>
+<html ng-app="app">
+  <head>
+    <script src="angular.js"></script>
+    <script src="angular-touch.js"></script>
+    <script src="angular-animate.js"></script>
+    <script src="angular-aria.js"></script>
+    <script src="ui-grid/csv.js"></script>
+    <script src="ui-grid/pdfmake.js"></script>
+    <script src="ui-grid/vfs_fonts.js"></script>
+    <script src="ui-grid/lodash.min.js"></script>
+    <script src="ui-grid/jszip.min.js"></script>
+    <script src="ui-grid/excel-builder.dist.js"></script>
+    <script src="ui-grid/ui-grid.js"></script>
+    <link rel="stylesheet" type="text/css" href="ui-grid/css/ui-grid.css">    
+    <script src="app.js"></script>    
+    <style type="text/css">
+    .grid {
+      width: 500px;
+      height: 400px;
+    }
+    </style>
+  </head>
+  <body>
+    <div ng-controller="MainCtrl">
+      <button id="expandAll" type="button" class="btn btn-success" ng-click="expandAll()">Expand All</button>
+      <button id="toggleFirstRow" type="button" class="btn btn-success" ng-click="toggleRow(0)">Toggle First Row</button>
+      <button id="toggleSecondRow" type="button" class="btn btn-success" ng-click="toggleRow(1)">Toggle Second Row</button>
+      <div id="grid1" ui-grid="gridOptions" ui-grid-tree-view class="grid"></div>
+    </div>
+  </body>
+</html>

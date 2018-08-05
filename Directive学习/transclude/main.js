@@ -16,7 +16,7 @@ app.directive('appSelect',function(){
 				});
 			}
 			this.addVersions=function(version){
-				versions.push(version);
+				versions.push(version);			
 			}
 		}
 	}
@@ -36,7 +36,7 @@ app.directive('version',function(){
 				<ng-transclude></ng-transclude>
 			</ul>
 		</div>`,
-		link:function(scope,element,attr,appController){
+		link:function(scope,element,attr,appController){			
 			scope.versionSelected=false;
 			appController.addVersions(scope);
 			scope.versionToggle=function(){
