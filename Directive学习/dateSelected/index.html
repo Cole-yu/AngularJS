@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>directive</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="js/angular.js"></script>
+</head>
+<body ng-controller="dateSelected">
+	<!-- <div class="dateSelected">
+		<div class="dateHeader" ng-click="dateSelectedActive=!dateSelectedActive">
+			<span ng-if="dateItemActiveIndex==-1">请选择日期</span>
+			<span ng-if="dateItemActiveIndex!=-1">{{startDate}} ~ {{endDate}}</span>
+		</div>
+		<div class="datePanel" ng-if="dateSelectedActive">
+			<div class="dateItem" ng-repeat="item in dateList track by $index" ng-class="{'dateItemActive':dateItemActiveIndex==$index}" ng-click="dateSelected($index)">
+				{{item.startDate}} ~ {{item.endDate}}
+			</div>
+		</div>
+	</div> -->
+	
+	<dates-selected>
+		<dates-item ng-repeat="item in dateList track by $index" startDate="{{item.startDate}}" endDate="{{item.endDate}}" read="read()"></dates-item>
+	</dates-selected>
+
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
