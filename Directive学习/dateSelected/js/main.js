@@ -1,30 +1,32 @@
 var app=angular.module("app",[]);
 app.controller('dateSelected',["$scope",function($scope){
 
-	// //日期选项面板
-	// $scope.dateSelectedActive=false;
+	$scope.read=function(startDate,endDate){		
+		console.log($scope);
+		//console.log($scope.dateSelectedActive,$scope.startDate,$scope.endDate);
 
-	// //选中的日期选项索引
-	// $scope.dateItemActiveIndex=-1;
+		$scope.start1=startDate;
+		$scope.end1=endDate;
 
-		
+		console.log($scope.start1,$scope.end1);
+	};
 
-	// $scope.dateSelected=function($index){
-	// 	//选中的日期选项索引
-	// 	$scope.dateItemActiveIndex=$index;
 
-	// 	//关闭日期选项面板
-	// 	$scope.dateSelectedActive=false;
+	$scope.read2=function(startDate,endDate){
+		console.log($scope);
+		$scope.start2=startDate;
+		$scope.end2=endDate;
 
-	// 	//选中的开始日期和结束日期
-	// 	$scope.startDate=$scope.dateList[$index].startDate;
-	// 	$scope.endDate=$scope.dateList[$index].endDate;
+		console.log($scope.start2,$scope.end2);
+	};
 
-	// }
+	$scope.read3=function(startDate,endDate){
+		console.log($scope);
+		$scope.start3=startDate;
+		$scope.end3=endDate;
 
-	$scope.read=function(){
-		console.log($scope.dateSelectedActive,$scope.startDate,$scope.endDate);
-	}
+		console.log($scope.start3,$scope.end3);
+	};
 
 	$scope.dateList=[
 		{
@@ -52,31 +54,47 @@ app.controller('dateSelected',["$scope",function($scope){
 			endDate:"2018-09-08"
 		}
 	];
+
+	$scope.$on("dateSelected",function(event,data){
+
+		$scope.startTime=data.startDate;
+		$scope.endTime=data.endDate;
+
+		console.log($scope.startTime,$scope.endTime);
+	});
+
 }]);
 
+app.run(function($templateCache){
+	$templateCache.put('dateSelected.html',
+		`<div class="dateSelected">
+			<div class="dateHeader" ng-click="toggle()">
+				<span ng-if="startDate==''">请选择日期</span>
+				<span ng-if="startDate!=''">{{startDate}} ~ {{endDate}}</span>
+			</div>
+			<div class="datePanel" ng-if="dateSelectedActive">
+				<ng-transclude></ng-transclude>
+			</div>
+		</div>`
+	);
+});
 
-app.directive('datesSelected',function(){
+
+app.directive('datesSelected',function($templateCache){
 	return {
 		restrict:"AECM",
 		replace:true,
 		transclude:true,
-		template:`
-			<div class="dateSelected">
-				<div class="dateHeader" ng-click="toggle()">
-					<span ng-if="startDate==''">请选择日期</span>
-					<span ng-if="startDate!=''">{{startDate}} ~ {{endDate}}</span>
-				</div>
-				<div class="datePanel" ng-if="dateSelectedActive">
-					<ng-transclude></ng-transclude>
-				</div>
-			</div>
-		`,
-		controller:function($scope){   //调用的是angular中的$scope对象
+		scope:{
+		},
+		template:$templateCache.get('dateSelected.html'),
+		controller:function(){   //调用的是angular中的$scope对象
 
 			//这三个会被定义到指令包含的控制器中,不是在datesSelected中私有的,耦合度很高
-			$scope.dateSelectedActive=false;
-			$scope.startDate="";
-			$scope.endDate="";
+			// $scope.dateSelectedActive=false;
+			// $scope.startDate="";
+			// $scope.endDate="";
+
 			var items=[];
 
 			this.itemSelected=function(selectItem){
@@ -93,17 +111,41 @@ app.directive('datesSelected',function(){
 				items.push(item);
 			};			
 
-			this.changDate=function(startDate,endDate){
-				$scope.startDate=startDate;
-				$scope.endDate=endDate;
-			};		
+			// this.changDate=function(startDate,endDate){
+			// 	$scope.startDate=startDate;
+			// 	$scope.endDate=endDate;
+			// };		
 
-			this.close=function(){
-				$scope.dateSelectedActive=false;
-			}
+			// this.close=function(){
+			// 	$scope.dateSelectedActive=false;
+			// }
+
+			// $scope.$on("dateSelected",function(event,data){
+			// 	console.log(event);
+			// 	console.log(data);
+
+			// 	$scope.startDate=data.startDate;
+			// 	$scope.endDate=data.endDate;				
+			// });
 			
 		},
 		link:function(scope,element,attrs){
+
+			scope.dateSelectedActive=false;
+			scope.startDate="";
+			scope.endDate="";
+
+			scope.$on("dateSelected",function(event,data){
+				// console.log(event);
+				// console.log(data);
+
+				scope.startDate=data.startDate;
+				scope.endDate=data.endDate;
+
+				scope.dateSelectedActive=false;
+			});
+
+
 			scope.toggle=function(){
 				scope.dateSelectedActive=!scope.dateSelectedActive;
 			};
@@ -124,7 +166,7 @@ app.directive("datesItem",function(){
 		},
 		template:`
 			<div class="dateItem" ng-class="{'dateItemActive':dateItemActive}"
-			 ng-click="dateSelected(startDate,endDate);">
+			 ng-click="dateSelected(startDate,endDate);read({startDate:startDate,endDate:endDate})">
 				{{startDate}} ~ {{endDate}}
 			</div>
 		`,
@@ -132,10 +174,16 @@ app.directive("datesItem",function(){
 			scope.dateItemActive=false;
 			controller.addItems(scope);
 			scope.dateSelected=function(startDate,endDate){
-				controller.itemSelected(scope);					
-				controller.changDate(startDate,endDate);
-				scope.read();
-				controller.close();
+				controller.itemSelected(scope);			
+				// controller.changDate(startDate,endDate);				
+				// controller.close();
+
+				scope.$emit("dateSelected",{
+					startDate:startDate,
+					endDate:endDate
+				});
+
+				// scope.read();
 			}
 		}
 	}

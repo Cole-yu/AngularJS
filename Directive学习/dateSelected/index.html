@@ -18,9 +18,17 @@
 			</div>
 		</div>
 	</div> -->
-	
+
 	<dates-selected>
-		<dates-item ng-repeat="item in dateList track by $index" startDate="{{item.startDate}}" endDate="{{item.endDate}}" read="read()"></dates-item>
+		<dates-item ng-repeat="item in dateList track by $index" startDate="{{item.startDate}}" endDate="{{item.endDate}}" read="read(startDate,endDate)"></dates-item>
+	</dates-selected>
+
+	<dates-selected>
+		<dates-item ng-repeat="item in dateList track by $index" startDate="{{item.startDate}}" endDate="{{item.endDate}}" read="read2(startDate,endDate)"></dates-item>
+	</dates-selected>
+
+	<dates-selected>
+		<dates-item ng-repeat="item in dateList track by $index" startDate="{{item.startDate}}" endDate="{{item.endDate}}" read="read3(startDate,endDate)"></dates-item>
 	</dates-selected>
 
 	<script type="text/javascript" src="js/main.js"></script>
